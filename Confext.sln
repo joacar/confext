@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B29B1342-8D35-43FE-9583-C11C8EE5DCE9}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+		Directory.Build.props = Directory.Build.props
+		global.json = global.json
+		Makefile.cmd = Makefile.cmd
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Confext", "src\Confext\Confext.csproj", "{81956D2F-85FC-45E1-85FE-5120FFD70B76}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Confext.Tests", "test\Confext.Tests\Confext.Tests.csproj", "{FBBE7472-82DE-4398-AF7A-0D9BB2B4F7CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81956D2F-85FC-45E1-85FE-5120FFD70B76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81956D2F-85FC-45E1-85FE-5120FFD70B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81956D2F-85FC-45E1-85FE-5120FFD70B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81956D2F-85FC-45E1-85FE-5120FFD70B76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBBE7472-82DE-4398-AF7A-0D9BB2B4F7CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBBE7472-82DE-4398-AF7A-0D9BB2B4F7CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBBE7472-82DE-4398-AF7A-0D9BB2B4F7CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBBE7472-82DE-4398-AF7A-0D9BB2B4F7CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18BAA288-F0EC-4ACA-959C-26C0745F2FD8}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,25 @@
+trigger:
+  - main
+
+pr:
+  - main
+
+variables:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  CI: true
+  BuildConfiguration: Release
+
+steps:
+  - task: UseDotNet@2
+    displayName: Install NET SDK (global.json)
+    inputs:
+      packageType: sdk
+      useGlobalJson: true
+
+  - task: DotNetCoreCLI@2
+    displayName: dotnet version
+    inputs:
+      command: custom
+      custom: --version
+
+

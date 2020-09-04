@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "confext": {
+      "commandName": "Project",
+      "commandLineArgs": "-i _appsettings.json",
+      "environmentVariables": {
+        "DOTNET_Environment": "Development"
+      }
+    }
+  }
+}

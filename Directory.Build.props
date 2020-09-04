@@ -1,0 +1,43 @@
+<Project>
+  <PropertyGroup>
+    <RootNamespace>Confext</RootNamespace>
+    <Lang>latest</Lang>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CI Condition="'$(CI)' == ''">false</CI>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Build exclusions">
+    <!-- Create resource for log message template -->
+    <NoWarn>$(NoWarn);CA1303</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RepoRoot Condition="'$(RepoRoot)' == ''">$([MSBuild]::NormalizePath($(MSBuildThisFileDirectory)))</RepoRoot>
+    <ArtifactsDir Condition="'$(ArtifactsDir)' == ''">$(RepoRoot)/artifacts</ArtifactsDir>
+    <BaseIntermediateOutputPath>$(ArtifactsDir)/build/$(MSBuildProjectName)/obj/</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(ArtifactsDir)/build/$(MSBuildProjectName)/bin/</BaseOutputPath>
+    <PackageOutputPath>$(ArtifactsDir)/nuget</PackageOutputPath>
+    <!--<CoverletOutput>$(ArtifactsDir)/test/$(MSBuildProjectName)/coverage.$(CoverletOutputFormat).xml</CoverletOutput>-->
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="'$(CI)' == 'true'">
+      <PropertyGroup>
+        <!-- https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml#build-variables -->
+        <RepoRoot Condition="'$(BUILD_SOURCESDIRECTORY)' != ''">$(BUILD_SOURCESDIRECTORY)</RepoRoot>
+        <ArtifactsDir Condition="'$(BUILD_ARTIFACTSTAGINGDIRECTORY)' != ''">$(BUILD_ARTIFACTSTAGINGDIRECTORY)</ArtifactsDir>
+        <!-- Owerrite BaseOutputPath with Build.BinariesDirectory? -->
+        <!-- Used by SourceLink https://github.com/dotnet/sourcelink/blob/master/docs/README.md#continuousintegrationbuild -->
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+      </PropertyGroup>
+
+      <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+      </ItemGroup>
+    </When>
+  </Choose>
+
+</Project>

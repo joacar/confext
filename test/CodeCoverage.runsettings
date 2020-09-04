@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <!-- https://github.com/coverlet-coverage/coverlet/blob/master/Documentation/VSTestIntegration.md -->
+        <Configuration>
+          <Format>opencover</Format>
+          <Exclude>[Mekanismen.Shared]*</Exclude>
+          <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>
+          <ExcludeByFile>**/Program.cs,**/Startup.cs,**/EnvironmentExtensions.cs,**/*Model.cs,**/Migrations/*</ExcludeByFile>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
