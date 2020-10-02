@@ -110,6 +110,57 @@ namespace Confext
             Equal(1, tracker.CapturedCount);
         }
 
+        [Fact]
+        public void Value_GroupCapturedEmpty_GenerateValue()
+        {
+            // Arrange
+            var tracker = new ConfigurationTracker(@"#{(\w*)}");
+
+            // Act
+            tracker.Push("Logging");
+            tracker.Push("IsEnabled");
+            tracker.Value("#{}");
+
+            // Assert
+            Equal(1, tracker.CapturedCount);
+            var node = tracker.Nodes[0];
+            Equal("#{Logging:IsEnabled}", node.Value);
+        }
+
+        [Fact]
+        public void Value_GroupCapturedEmpty_PatternDoubleBraces_GenerateValue()
+        {
+            // Arrange
+            var tracker = new ConfigurationTracker(@"^{{(\w*)}}$");
+
+            // Act
+            tracker.Push("Logging");
+            tracker.Push("IsEnabled");
+            tracker.Value("{{}}");
+
+            // Assert
+            Equal(1, tracker.CapturedCount);
+            var node = tracker.Nodes[0];
+            Equal("#{Logging:IsEnabled}", node.Value);
+        }
+
+        [Fact]
+        public void Value_GroupCaptured_TakeValue()
+        {
+            // Arrange
+            var tracker = new ConfigurationTracker(@"#{(\w*)}");
+
+            // Act
+            tracker.Push("Logging");
+            tracker.Push("IsEnabled");
+            tracker.Value("#{LoggingIsEnabled}");
+
+            // Assert
+            Equal(1, tracker.CapturedCount);
+            var node = tracker.Nodes[0];
+            Equal("{{LoggingIsEnabled}}", node.Value);
+        }
+
         [Theory]
         [MemberData(nameof(GetKeys))]
         public async Task WriteTo_KeysValues_WriteKeyValue(string[] keys, string value, string expected)
