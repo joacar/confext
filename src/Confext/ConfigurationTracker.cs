@@ -13,7 +13,7 @@ namespace Confext
     {
         private readonly LinkedList<string> _keys = new LinkedList<string>();
 
-        private readonly ICollection<Node> _nodes = new List<Node>();
+        private readonly List<Node> _nodes = new List<Node>();
         private readonly string _pattern;
         private readonly ReadOnlyMemory<char> _prefix;
         private readonly Regex _regex;
@@ -43,6 +43,9 @@ namespace Confext
                 throw new ArgumentException(exception.Message, nameof(pattern), exception);
             }
         }
+
+        // For testing
+        internal IReadOnlyList<Node> Nodes => _nodes;
 
         /// <summary>
         /// Gets the number of matched values.
@@ -82,7 +85,36 @@ namespace Confext
             {
                 throw new InvalidOperationException($"No key(s) pushed. Call {nameof(Push)} to track key(s).");
             }
-            if (_regex.IsMatch(value))
+
+            var match = _regex.Match(value);
+
+            void GenerateValue(in string[] strings)
+            {
+                // TODO: Great area to exercise Span<char>
+                value = string.Join(":", strings);
+                // The generated value must be enclosed properly in the pattern
+                var pattern = match.Groups[0].Value;
+                var matched = match.Groups[1];
+                var nValue = new char[value.Length + pattern.Length];
+                var map = 0;
+                for (var p = 0; p < pattern.Length; ++p)
+                {
+                    if (p == matched.Index)
+                    {
+                        // Replace empty match group with generated value
+                        value.CopyTo(0, nValue, p, value.Length);
+                        // Fast forward mapping to end of generated value ready to consume rest of regex
+                        map += value.Length;
+                    }
+
+                    Debug.Assert(map < nValue.Length);
+                    nValue[map++] = pattern[p];
+                }
+
+                value = new string(nValue);
+            }
+
+            if (match.Success)
             {
                 var i = 0;
                 var keys = new string[_keys.Count];
@@ -90,7 +122,11 @@ namespace Confext
                 {
                     keys[i++] = key;
                 }
-
+                // If matched groups value is empty string then we generate the value based on the keys
+                if (match.Groups.Count == 2 && string.IsNullOrEmpty(match.Groups[1].Value))
+                {
+                    GenerateValue(keys);
+                }
                 _nodes.Add(new Node(keys, value));
             }
 
@@ -141,7 +177,7 @@ namespace Confext
         }
 
         [DebuggerDisplay("{" + nameof(DebuggerDisplay) + "(),nq}")]
-        private sealed class Node
+        internal sealed class Node
         {
             private readonly string[] _names;
             private readonly string _pattern;
@@ -151,6 +187,9 @@ namespace Confext
                 _names = names ?? throw new ArgumentNullException(nameof(names));
                 _pattern = pattern;
             }
+
+            // Testing only
+            internal string Value => _pattern;
 
             public override string ToString() => $"{string.Join("__", _names)}={_pattern}";
 
