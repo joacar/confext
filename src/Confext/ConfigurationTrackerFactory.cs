@@ -31,7 +31,7 @@ namespace Confext
                         tracker.Value(jsonReader.GetString());
                         break;
                     case JsonTokenType.EndObject:
-                        // Pop nested
+                    // Pop nested
                     case JsonTokenType.Number:
                     case JsonTokenType.True:
                     case JsonTokenType.False:
