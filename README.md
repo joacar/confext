@@ -6,7 +6,7 @@
 [nuget]: https://www.nuget.org/packages/joacar.confext/
 [nuget-pre]: https://www.nuget.org/packages/joacar.confext/absoluteLatest
 [nuget-pre-badge]: https://img.shields.io/nuget/vpre/Joacar.Confext?color=yellow&label=pre&style=flat-square
-[nuget-badge]: https://img.shields.io/nuget/v/joacar.confext.svg?style=flat-square
+[nuget-badge]: https://img.shields.io/nuget/v/joacar.confext.svg?color=green&style=flat-square
 [nuget-download-badge]: https://img.shields.io/nuget/dt/joacar.confext?style=flat-square
 
 Tool to extract configuration values from appsettings.json
