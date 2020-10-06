@@ -1,13 +1,13 @@
 # Confext (**Conf**iguration **Ext**raction)
 
 [![Nuget][nuget-badge] ![NuGet Downloads][nuget-download-badge]][nuget]
+[![Nuget][nuget-pre-badge]][nuget-pre]
 
-![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Joacar.Confext?color=yellow&label=pre&style=flat-square)
-
-[nuget]: https://www.nuget.org/packages/Joacar.Confext/
-[nuget-badge]: https://img.shields.io/nuget/v/Joacar.Confext.svg?style=flat-square
-[nuget-download-badge]: https://img.shields.io/nuget/dt/Joacar.Confext?style=flat-square
-
+[nuget]: https://www.nuget.org/packages/joacar.confext/
+[nuget-pre]: https://www.nuget.org/packages/joacar.confext/absoluteLatest
+[nuget-pre-badge]: https://img.shields.io/nuget/vpre/Joacar.Confext?color=yellow&label=pre&style=flat-square
+[nuget-badge]: https://img.shields.io/nuget/v/joacar.confext.svg?style=flat-square
+[nuget-download-badge]: https://img.shields.io/nuget/dt/joacar.confext?style=flat-square
 
 Tool to extract configuration values from appsettings.json
 
